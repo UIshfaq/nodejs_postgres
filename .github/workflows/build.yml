@@ -14,7 +14,7 @@ jobs:
       - name: Build de l'image Docker
         run: docker compose up -d --build nodejs_postgres-node:latest .
 
-      - name: : wait 10 seconds
+      - name: Attente du démarrage
         run: sleep 10
 
       - name: Lancement du curl
