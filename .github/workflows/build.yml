@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 1. IL MANQUAIT CETTE ÉTAPE : Télécharger ton code sur la machine
+      # Bien écrire "checkout" en un seul mot
       - name: Checkout du code
-        uses: actions/chec  kout@v4
+        uses: actions/checkout@v4
 
       # 2. Ta commande d'origine
       - name: Build de l'image Docker
