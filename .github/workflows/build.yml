@@ -1,0 +1,12 @@
+name: Build test
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build de l'image Docker
+        run: docker build -t nodejs_postgres-node:latest .
