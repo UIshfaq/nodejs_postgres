@@ -17,4 +17,4 @@ jobs:
       - name: Lancement du curl
         run: |
             sleep 10 
-            curl -X get http://localhost:3000/api
+            curl -X GET http://localhost:3000/api/
