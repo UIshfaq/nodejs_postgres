@@ -8,13 +8,13 @@ jobs:
   test-and-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout du code
-        uses: actions/checkout@v4
-
-      - name: Build de l'image Docker
-        run: docker build -t nodejs_postgres-node:latest .
-
-      - name: Lancement du curl
+      - name: Test de démarrage du conteneur Docker
         run: |
-            sleep 10 
-            curl -X GET http://localhost:3000/api/
+          docker run -d -p 3000:3000 --name api-test nodejs_postgres-node:latest
+          sleep 10 
+          
+          # NOUVEAU : On affiche les logs du conteneur pour voir l'erreur Node.js            echo "=== LOGS DU CONTENEUR ==="
+          docker logs api-test
+          echo "========================="
+          
+          curl -f http://localhost:3000/ || exit 1
