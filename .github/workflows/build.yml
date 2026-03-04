@@ -8,11 +8,13 @@ jobs:
   test-and-build:
     runs-on: ubuntu-latest
     steps:
-      # 1. IL MANQUAIT CETTE ÉTAPE : Télécharger ton code sur la machine
-      # Bien écrire "checkout" en un seul mot
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      # 2. Ta commande d'origine
       - name: Build de l'image Docker
         run: docker build -t nodejs_postgres-node:latest .
+
+      - name: Lancement du curl
+        run: |
+            sleep 10 
+            curl -X get http://localhost:3000/api
