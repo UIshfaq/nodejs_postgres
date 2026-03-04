@@ -1,22 +1,19 @@
-name: Build test
+name: Test Backend
 
 on:
   push:
-    branches: [main]
 
 jobs:
-  test-and-build:
+  test-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout du code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Build de l'image Docker
-        run: docker compose up -d --build  .
+      - name: Run
+        run: docker compose up -d --build
 
-      - name: Attente du démarrage
+      - name: Wait
         run: sleep 10
 
-      - name: Lancement du curl
-        run: |
-            curl -X GET http://localhost:3000/api/
+      - name: Test
+        run: curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/api
