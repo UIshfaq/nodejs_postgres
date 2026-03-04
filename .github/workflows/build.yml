@@ -31,3 +31,17 @@ jobs:
 
       - name: Push de l'image vers Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/nodejs_postgres-node:latest
+
+
+deploy:
+  needs: build-and-push
+  runs-on: ubuntu-latest
+  steps:
+    - name: Deploy to VPS via SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          whoami
